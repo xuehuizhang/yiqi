@@ -1,0 +1,2784 @@
+{{define "index/com.html"}}
+<!DOCTYPE html>
+<html lang="zh" class="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="baidu-site-verification" content="MfC8ppEukL" />
+    <meta baidu-gxt-verify-token="fa750b19bb54c9ad03503638f41923db">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="mi3xbBvZam9wyp7zZ2ASP6u5f4pumUWyToZBXnWX">
+
+    <title>
+        Go 技术论坛 | Golang / Go 语言中国知识社区      </title>
+    <meta name="description" content="我们致力于为 Golang / Go 语言开发者提供一个分享创造、结识伙伴、协同互助的中文论坛，由 Golang  / Go 语言爱好者维护的高品质 Golang  / Go 语言中国知识社区。" />
+    <meta name="keywords" content="go,golang,go教程,golang教程,go开发,go招聘,go论坛,go社区,golang社区,golang论坛,go中国,go文档,go中文,go中文文档" />
+
+    <meta name="author" content="Summer" />
+
+    <link rel="shortcut icon" href="https://cdn.learnku.com//uploads/communities/sNljssWWQoW6J88O9G37.png!/both/44x44" />
+
+    <!-- Styles -->
+    <link href="https://cdn.learnku.com//build/css/bd0cbd7aa15e5518a47099735133bf3a-vendors.css" rel="stylesheet">
+    <link href="https://cdn.learnku.com//build/css/a91e47e2539b98438cb4c6c3a665d642-app.css" rel="stylesheet">
+<!--    <link href="/static/semactic/dist/semantic.css">-->
+<!--    <link href="/static/semactic/dist/components/*.css">-->
+
+</head>
+
+<body class=" wildcard-page">
+
+<!-- 为 Pjax 和模板加载优化，只能放这里 -->
+<script>
+    window.Laravel = {"csrfToken":"mi3xbBvZam9wyp7zZ2ASP6u5f4pumUWyToZBXnWX"}
+    window.Config = {
+        'GA_Tracking_ID': 'G-VD6FH8BPTD',
+        'user_id': 0,
+        'is_student': '',
+        'search_user_id': 0,
+        'cdn_domain': 'cdn.learnku.com',
+        'domain': 'learnku.com',
+        'request_interval': 600000, // 消息通知检测周期
+        'notification_count': 0,
+        'token': 'mi3xbBvZam9wyp7zZ2ASP6u5f4pumUWyToZBXnWX',
+        'environment': 'production',
+        'url': 'https://learnku.com',
+        'tags_url': '',
+        'scroll_to_top': true,
+        'community': {
+            'id': 6,
+            'name': 'Go',
+            'favicon': 'https://cdn.learnku.com//uploads/communities/sNljssWWQoW6J88O9G37.png!/both/44x44'
+        },
+        'routes': {
+            'notificationsCount': 'https://learnku.com/notifications/count',
+            'upload_image': 'https://learnku.com/courses/upload_image',
+            // 社区搜索
+            'api_search' : 'https://learnku.com/communities/go/api_search',
+            'collections_store': 'https://learnku.com/collections',
+            'collections_my': 'https://learnku.com/collections/my/ajax',
+            'annotations_store': 'https://learnku.com/annotations',
+            'annotations_destroy': 'https://learnku.com/annotations/destroy',
+            'annotations_update': 'https://learnku.com/annotations/update',
+            'annotation_setting': 'https://learnku.com/users/settings/annotation_setting',
+        },
+        'cdnDomain': 'https://cdn.learnku.com/',
+        'overlay': '',
+        'following_users': [],
+        'search_type': 'standard',
+        'book_id': 0,
+        'is_docs': "no",
+        'article_id': 0,
+        'topic_id': 0,
+        'user_settings': {
+            'visit_topic_patches_page': false,
+            'annotation_disabled': 'yes',
+        },
+        'can': {},
+        'editor': {},
+        'destroyeditor_id': {
+        },
+
+        'content': {}
+    };
+
+    var ShowCrxHint = 'no';
+
+    function onWXWebView() {
+        $('.wechat-login-link').attr("href", "https://learnku.com/auth/oauth?driver=wechat_client")
+        $('.show-on-wechat-view').show();
+    }
+    if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+        onWXWebView();
+    } else {
+        if (document.addEventListener) {
+            document.addEventListener("WeixinJSBridgeReady", onWXWebView, false);
+        } else if (document.attachEvent) {
+            document.attachEvent("WeixinJSBridgeReady", onWXWebView);
+            document.attachEvent("onWeixinJSBridgeReady", onWXWebView);
+        }
+    }
+</script>
+
+<style>
+    .ui.top.menu {
+        border-top: 4px solid #00b5ad;
+    }
+
+    .ui.fluid.search .results {
+        width: 550px;
+    }
+
+    @media  only screen and (max-width: 767px) {
+        .ui.top.menu>.ui.container {
+            height: 52px;
+            flex-direction: initial;
+        }
+    }
+
+
+    /* 顶部导航栏 */
+    .ui.top.menu {
+        border-top: 4px solid #368cda;
+    }
+
+    /* 右边导航栏顶部样式 */
+    .ui.top-color.segment:not(.inverted) {
+        border-top: 2px solid #368cda;
+    }
+
+    /* 右边导航栏顶部样式 */
+    .ui.top-color.card:not(.inverted) {
+        border-top: 2px solid #368cda;
+    }
+
+    /* 主要按钮 */
+
+    .ui.primary.buttons .button,
+    .ui.primary.button {
+        background-color: #368cda;
+        border-color: #368cda;
+    }
+
+    /* 主要按钮选中状态 */
+    .ui.primary.buttons .button:hover,
+    .ui.primary.button:hover,
+    .ui.primary.button:active,
+    .ui.primary.buttons .button:active,
+    .ui.primary.button:focus,
+    .ui.primary.buttons .button:focus,
+    .ui.primary.active.button,
+    .ui.primary.button .active.button:active,
+    .ui.primary.buttons .active.button,
+    .ui.primary.buttons .active.button:active {
+        background-color: #368cda;
+        border-color: #368cda;
+    }
+
+    /* 外框按钮 */
+    .ui.basic.primary.buttons .button,
+    .ui.basic.primary.button {
+        color: #368cda !important;
+        box-shadow: 0px 0px 0px 1px #368cda inset !important;
+    }
+
+    /* 外框按钮选中状态 */
+    .ui.basic.primary.buttons .button:hover,
+    .ui.basic.primary.button:hover {
+        color: #368cda !important;
+        box-shadow: 0px 0px 0px 1px #368cda inset !important;
+    }
+
+    .ui.basic.primary.buttons .active.button,
+    .ui.basic.primary.active.button {
+        color: #368cda !important;
+        box-shadow: 0px 0px 0px 1px #368cda inset !important;
+    }
+
+    .ui.basic.primary.buttons .button:active,
+    .ui.basic.primary.button:active,
+    .ui.basic.primary.buttons .active.button,
+    .ui.basic.primary.active.button,
+    .ui.basic.buttons .button:hover,
+    .ui.basic.button:hover,
+    .ui.basic.primary.buttons .button:focus,
+    .ui.basic.primary.button:focus {
+        box-shadow: 0px 0px 0px 1px #368cda inset !important;
+    }
+
+    .pagination>.active>a,
+    .pagination>.active>a:focus,
+    .pagination>.active>a:hover,
+    .pagination>.active>span,
+    .pagination>.active>span:focus,
+    .pagination>.active>span:hover {
+        background-color: #368cda;
+        border-color: #368cda;
+    }
+
+    .pagination>li>a,
+    .pagination>li>span {
+        color: #368cda;
+    }
+
+    .footer {
+        max-height: max-content;
+    }
+
+</style>
+
+
+
+
+
+<div class="ui top menu sidebar stackable">
+    <div class="item">
+        <img class="ui image" style="width:26px;height:26px;margin-top:-2px;"
+             src="https://cdn.learnku.com//uploads/communities/sNljssWWQoW6J88O9G37.png!/both/44x44">
+        <span class="site-name ml-2">Go</span>
+    </div>
+
+
+
+    <form class="ui fluid category  item secondary"
+          action="https://learnku.com/go/search"
+          method="GET">
+        <div class="ui icon input">
+            <input class="prompt" name="q" type="text" placeholder="搜索"
+                   value="">
+            <i class="search icon"></i>
+        </div>
+    </form>
+
+
+    <a href="https://learnku.com/go" class="item secondary">
+        <i class="icon list"></i> 话题列表
+    </a>
+
+    <a href="https://learnku.com/go/wikis" class="item secondary">
+        <i class="icon wikipedia"></i> 社区 Wiki
+    </a>
+
+    <a href="https://learnku.com/go/c/translations"
+       class="item">
+        <i class="icon translate"></i> 优质外文
+    </a>
+
+    <a href="https://learnku.com/go/c/jobs" class="item">
+        <i class="icon suitcase"></i> 招聘求职
+    </a>
+
+    <a href="https://learnku.com/go/courses" class="item">
+        <i class="icon book"></i> Go 实战教程
+    </a>
+
+    <a href="https://learnku.com/go/docs" class="item">
+        <i class="icon text file outline"></i> 社区文档
+    </a>
+
+    <div class="item">
+        <a class="ui basic small button no-pjax" href="https://learnku.com/auth/login"><i class="icon user "></i> 登录
+        </a>
+    </div>
+
+    <div class="item">
+        <a class="ui basic small button no-pjax" href="https://learnku.com/auth/register"><i class="icon signup "></i>
+            注册 </a>
+    </div>
+</div>
+
+
+<div class="pusher">
+
+    <div class="main container">
+
+        <nav class="ui main borderless menu top stackable topnav" id="topnav">
+            <div class="ui container">
+
+                <div class="ui inline scrolling community-nav dropdown mr-2"
+                     style="padding-left: 22px;display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-align: center;-ms-flex-align: center;align-items: center;">
+                    <div class="text site-logo" style="color:#888888;display: flex;">
+
+                        <img class="ui image" style="width:26px;height:26px;margin-top:-2px;"
+                             src="https://cdn.learnku.com//uploads/communities/sNljssWWQoW6J88O9G37.png!/both/44x44">
+                        <span class="site-name hide-on-tablet">Go</span>
+                        <i class="dropdown icon ml-3"></i>
+                    </div>
+                    <div class="menu ml-4 communities" style="max-height: 520px;padding: 8px;">
+
+                        <div class="ui icon search input" style="width: 172px;float:left;">
+                            <i class="search icon"></i>
+                            <input type="text" placeholder="搜索社区">
+                        </div>
+
+                        <a class="item pr-3 mt-2" href="https://learnku.com">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com/uploads/images/201901/24/1/OyBnfB2vlk.png!/both/44x44"> 首页
+                        </a>
+
+
+                        <div class="divider clearfix"></div>
+
+
+                        <a class="item" href="https://learnku.com/laravel" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/WtC3cPLHzMbKRSZnagU9.png!/both/44x44"> Laravel
+                        </a>
+                        <a class="item" href="https://learnku.com/go" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/sNljssWWQoW6J88O9G37.png!/both/44x44"> Go
+                        </a>
+                        <a class="item" href="https://learnku.com/php" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/Y7fElYYwCFjTTXCdwPNW.png!/both/44x44"> PHP
+                        </a>
+                        <a class="item" href="https://learnku.com/python" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/mTBLIP7o0gVGn3ZCphpN.png!/both/44x44"> Python
+                        </a>
+                        <a class="item" href="https://learnku.com/vuejs" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/hIZjRRdF8oVYZy69XJnT.png!/both/44x44"> Vue.js
+                        </a>
+                        <a class="item" href="https://learnku.com/java" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/h3Xef7s3mLKYmqwBRIiA.png!/both/44x44"> Java
+                        </a>
+                        <a class="item" href="https://learnku.com/mysql" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com/uploads/images/201908/18/1/yAH1hJ3pZF.png!/both/44x44"> MySQL
+                        </a>
+                        <a class="item" href="https://learnku.com/rust" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/Qj48vezkYfZM1ZM5Y75X.png!/both/44x44"> Rust
+                        </a>
+                        <a class="item" href="https://learnku.com/lk" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/b1qLi8CKYnkipeMwdvPU.png!/both/44x44"> LK
+                        </a>
+                        <a class="item" href="https://learnku.com/elasticsearch" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com/uploads/images/201908/10/25425/QdtUV2rox6.png!/both/44x44"> Elasticsearch
+                        </a>
+                        <a class="item" href="https://learnku.com/f2e" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/DGHjM6p2qdamHmFJZt9g.jpg!/both/44x44"> F2E 前端
+                        </a>
+                        <a class="item" href="https://learnku.com/coder" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/6vqw97jFnblvXh3F1o0F.png!/both/44x44"> 程序员
+                        </a>
+                        <a class="item" href="https://learnku.com/server" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/pwwWCCpPeKm8z3HEubmo.png!/both/44x44"> Server
+                        </a>
+                        <a class="item" href="https://learnku.com/database" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/ceowUfx7bxLyyng5ykyu.png!/both/44x44"> Database
+                        </a>
+                        <a class="item" href="https://learnku.com/devtools" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/0QFgKXFJBOmsQNf47XOY.png!/both/44x44"> DevTools
+                        </a>
+                        <a class="item" href="https://learnku.com/cs" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/BTBwRdYCj8UFXIjMqEbG.jpg!/both/44x44"> Computer Science
+                        </a>
+                        <a class="item" href="https://learnku.com/app" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/tSK8naqmi1fiQTJcoa2o.png!/both/44x44"> 手机开发
+                        </a>
+                        <a class="item" href="https://learnku.com/adonisjs" style="padding-right: 2.2em!important;">
+                            <img class="ui image" style="width:20px;height:20px;margin-top:-2px;"
+                                 src="https://cdn.learnku.com//uploads/communities/2VHh3slULN4XkbU5douV.png!/both/44x44"> AdonisJS
+                        </a>
+
+
+                    </div>
+                </div>
+
+                <a class="item header right menu " style="display:none">
+                    <i class="icon align justify"></i>
+                </a>
+
+                <a href="https://learnku.com/go" class="item secondary">
+                    社区
+                </a>
+
+
+
+
+                <a href="https://learnku.com/go/wikis" class="item secondary">
+                    Wiki
+                </a>
+
+
+                <div class="ui simple item dropdown article stackable nav-user-item  secondary">
+                    教程 <i class="dropdown icon"></i>
+
+                    <div class="ui menu stackable">
+                        <a href="https://learnku.com/go/courses" class="item">
+                            <i class="icon home"></i> Go 实战教程首页
+                        </a>
+
+                        <a class="item" href="https://learnku.com/courses/go-basic/1.19"
+                           style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/202006/11/1/VLvh1nxhqP.png!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《G01 Go 实战：Web 入门》
+                        </a>
+                        <a class="item" href="https://learnku.com/courses/go-api/1.19"
+                           style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/202112/29/1/xgxxss6kGK.png!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《G02 Go API 实战》
+                        </a>
+                        <a class="item" href="https://learnku.com/courses/go-video/2022"
+                           style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/202110/06/1/Mv4VT4Prlf.png!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《GX1 Golang 五分钟视频》
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ui simple item dropdown article stackable nav-user-item secondary">
+                    文档 <i class="dropdown icon"></i>
+
+                    <div class="ui menu stackable">
+                        <a href="https://learnku.com/go/docs" class="item">
+                            <i class="icon home"></i> 社区文档首页
+                        </a>
+
+                        <a class="item" href="https://learnku.com/docs/effective-go/2020" style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/201912/06/1/g4O1CkGc2B.png!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《高效的 Go 编程 Effective Go》
+                        </a>
+                        <a class="item" href="https://learnku.com/docs/go-blog" style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/201912/28/1/3CTV7kaXtg.png!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《Go Blog 中文翻译》
+                        </a>
+                        <a class="item" href="https://learnku.com/docs/the-little-go-book" style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/201807/09/1/7ZpHvbghuV.jpg!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《Go 简易教程》
+                        </a>
+                        <a class="item" href="https://learnku.com/docs/gobyexample/2020" style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/201912/07/1/2zrnUUEy5O.png!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《Go 编程实例 Go by Example》
+                        </a>
+                        <a class="item" href="https://learnku.com/docs/the-way-to-go" style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/201805/11/1/ZnrA2VK0SN.png!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《Go 入门指南》
+                        </a>
+                        <a class="item" href="https://learnku.com/docs/go-fundamental-programming" style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/201805/12/1/cqO2hVEMtp.png!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《Go 编程基础（视频）》
+                        </a>
+                        <a class="item" href="https://learnku.com/docs/build-web-application-with-golang" style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/201805/16/1/mIe9zcWQM4.png!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《Go Web 编程》
+                        </a>
+                        <a class="item" href="https://learnku.com/docs/iris-go/10" style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/201807/13/1/JV7EhZLizp.png!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《Iris 框架中文文档》
+                        </a>
+                        <a class="item" href="https://learnku.com/docs/learn-go-with-tests" style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/201911/21/36517/aviegH16FE.png!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《通过测试学习 Go 编程》
+                        </a>
+                        <a class="item" href="https://learnku.com/docs/gin-gonic/1.7" style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/201807/14/1/K1ijsbTBcU.png!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《Gin 框架中文文档》
+                        </a>
+                        <a class="item" href="https://learnku.com/docs/gorm/v2" style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/201807/30/1/a3e946EpRi.png!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《GORM 中文文档》
+                        </a>
+                        <a class="item" href="https://learnku.com/docs/go-database-sql" style="padding-right: 36px!important;">
+                            <img class="ui avatar image" src="https://cdn.learnku.com/uploads/images/202009/17/1/qt7yXJ2jD0.png!/both/200x200"
+                                 style="width:20px;height:20px;">
+                            《Go SQL 数据库教程》
+                        </a>
+                    </div>
+                </div>
+
+
+                <form class="ui fluid category search item secondary hide-on-991"
+                      action="https://learnku.com/go/search"
+                      method="GET">
+                    <div class="ui icon input">
+                        <input class="prompt" name="q" type="text"
+                               placeholder="社区搜索"
+                               value="">
+                        <i class="search icon"></i>
+                    </div>
+                    <div class="results"></div>
+                </form>
+
+                <div class=" right menu stackable secondary">
+                    <div class="item rm-link-color">
+                        <a class="mr-4 no-pjax login_required" href="https://learnku.com/auth/login"><i
+                                class="icon sign in "></i> 登录 </a>
+                        <a class="no-pjax" href="https://learnku.com/auth/register" style="margin-left: 10px;"><i
+                                class="icon user add "></i> 注册 </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </nav>
+
+
+
+
+
+
+        <div class="mb-3 hide show-on-wechat-view">
+            <div class="ui centered grid container message-container">
+                <div class="sixteen wide column pt-0 pb-0">
+                    <a class="ui button fluid green wechat-login-link"
+                       href="https://learnku.com/auth/oauth?driver=wechat"><i class="icon wechat "></i>
+                        微信登录</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="ui centered grid container stackable">
+
+            <div class="twelve wide column right-side stacked segments">
+
+
+
+
+
+
+                <div class="ui segment topic-index-list pt-1" style="padding: 8px 6px;">
+                    <div class="content pl-3 pr-3" style="padding-top: 6px;">
+
+                        <div class="ui secondary menu small mb-0 pb-0 topic-nav" style="min-height: 30px;">
+
+                            <a href="https://learnku.com/go" class="ui item popover active" style="padding: .38571429em .52857143em;">
+                                活跃
+                            </a>
+
+                            <a href="https://learnku.com/go?order=recent&amp;l=y" class="ui item pull-right " style="padding: .38571429em .52857143em;">
+                                最新
+                            </a>
+
+                            <a href="https://learnku.com/go?filter=created_at_1_week&amp;order=score&amp;l=y" class="ui item pull-right " style="padding: .38571429em .52857143em;">
+                                周榜
+                            </a>
+                            <a tabindex="-1" href="https://learnku.com/go?filter=created_at_1_month&amp;order=score&amp;l=y" class="ui item pull-right " style="padding: .38571429em .52857143em;">
+                                月榜
+                            </a>
+                            <a tabindex="-1" href="https://learnku.com/go?filter=created_at_12_month&amp;order=score&amp;l=y" class="ui item pull-right " style="padding: .38571429em .52857143em;">
+                                年榜
+                            </a>
+
+                            <a href="https://learnku.com/go/c/translations" class="ui item popover " style="padding: .38571429em .52857143em;">
+                                翻译
+                            </a>
+                            <a href="https://learnku.com/go/c/jobs" class="ui item popover " style="padding: .38571429em .52857143em;">
+                                工作
+                            </a>
+                            <a href="https://learnku.com/go/c/creative" class="ui item popover " style="padding: .38571429em .52857143em;">
+                                作品
+                            </a>
+                            <a href="https://learnku.com/go/c/qa" class="ui item popover " style="padding: .38571429em .52857143em;">
+                                问答
+                            </a>
+                            <a href="https://learnku.com/go/c/interview" class="ui item popover " style="padding: .38571429em .52857143em;">
+                                面试题
+                            </a>
+                            <a href="https://learnku.com/go/c/code" class="ui item popover " style="padding: .38571429em .52857143em;">
+                                代码速记
+                            </a>
+
+                            <a href="https://learnku.com/go/weekly" target="_blank" class="ui item popover" style="padding: .38571429em .52857143em;">
+                                周刊
+                            </a>
+
+                            <div style="order:2;margin-left: auto;font-size:0.8em;padding-top: 5px;">
+
+
+
+                                <div class="ui basic simple icon dropdown button shadow-none  tiny hide-on-mobile" style="padding: .28571429em;">
+                                    <i class="sort icon"></i>
+                                    <span class="text"></span>
+                                    <div class="menu bg-white border-left border-right">
+                                        <h3 class="header fs-small bg-white border-left border-right">
+                                            请选择排序方式
+                                        </h3>
+                                        <div class="ui divider bg-white border-left border-right"></div>
+
+                                        <a class="item icon bg-white border-left border-right" href="https://learnku.com/go?order=default">
+                                            <i class="icon random"></i> 活跃
+                                        </a>
+                                        <a class="item icon bg-white border-left border-right" href="https://learnku.com/go?order=recent">
+                                            <i class="icon time"></i> 最新
+                                        </a>
+
+                                        <a class="item icon bg-white border-left border-right" href="https://learnku.com/go?order=vote">
+                                            <i class="icon thumbs up outline"></i> 点赞
+                                        </a>
+                                        <a class="item icon bg-white border-left border-right" href="https://learnku.com/go?order=reply">
+                                            <i class="icon comment outline"></i>评论
+                                        </a>
+                                        <a class="item icon bg-white border-left border-right" href="https://learnku.com/go?order=score">
+                                            <i class="icon star empty"></i> 评分
+                                        </a>
+                                    </div>
+                                </div>
+
+
+                                <div class="ui basic simple icon dropdown button shadow-none  tiny hide-on-mobile" style="padding: .28571429em;">
+                                    <i class="filter icon"></i>
+
+                                    <span class="text"></span>
+                                    <div class="menu ">
+                                        <h3 class="header fs-small bg-white border-left border-right">
+                                            请选择过滤方式
+                                        </h3>
+                                        <div class="ui divider bg-white border-left border-right"></div>
+
+                                        <a class="item bg-white border-left border-right" href="https://learnku.com/go?filter=">
+                                            <i class="icon remove"></i> 清除过滤
+                                        </a>
+
+                                        <a class="item bg-white border-left border-right" href="https://learnku.com/go?filter=excellent">
+                                            <i class="icon trophy"></i> 精华
+                                        </a>
+                                        <a class="item bg-white border-left border-right" href="https://learnku.com/go?filter=unsolved">
+                                            <i class="icon trophy"></i> 未解答
+                                        </a>
+                                        <a class="item bg-white border-left border-right" href="https://learnku.com/go?filter=created_at_1_week">
+                                            <i class="icon calendar"></i> 一周
+                                        </a>
+
+                                        <a class="item bg-white border-left border-right" href="https://learnku.com/go?filter=created_at_1_month">
+                                            <i class="icon calendar"></i> 一月内
+                                        </a>
+                                        <a class="item bg-white border-left border-right" href="https://learnku.com/go?filter=created_at_3_month">
+                                            <i class="icon calendar"></i> 三月内
+                                        </a>
+                                        <a class="item bg-white border-left border-right border-bottom" href="https://learnku.com/go?filter=created_at_12_month">
+                                            <i class="icon calendar"></i> 一年内
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="ui basic simple icon dropdown button shadow-none  tiny hide-on-mobile" style="padding: .28571429em;">
+                                    <i class="settings icon"></i>
+
+                                    <div class="menu ">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="ui divider mb-1 topic-index-divider" style="    border-top: none;border-bottom: 1px solid rgb(219, 224, 226);margin-top: 6px;"></div>
+
+                        <div class="simple topic-list rm-link-color mt-0">
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/go" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com//uploads/communities/sNljssWWQoW6J88O9G37.png!/both/44x44"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                    <span class="hide-on-mobile ui label status small yellow">置顶</span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/docs/guide/administrator/4485" target="_blank">
+                <span class="topic-title">
+                    版主招募中~ 邀您与 Go 技术论坛一同成长
+                </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/go/t/64262" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/1_1530614766.png!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small yellow">
+                                    公告
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/go/t/64262" target="">
+                                <span class="topic-title">
+
+                                                                            新课程发布《G02 Go API 实战》
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>130
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-26 14:36:35" class="timeago">1周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84100" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/116853_1697507711.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84100" target="">
+                                <span class="topic-title">
+
+                                                                            分享一本一直更新的Gitbook，[为你自己学Go]
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>14
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-11-03 13:24:12" class="timeago">3小时前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/go/t/83884" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/115691_1693656227.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    工作
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/go/t/83884" target="">
+                                <span class="topic-title">
+
+                                                                            24届校招Golang求职
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>34
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-11-03 11:20:20" class="timeago">5小时前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/go/t/84330" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/117330_1698823246.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    问答
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/go/t/84330" target="">
+                                <span class="topic-title">
+
+                                                                            Gin框架在向网页上传HTML文件时，模板文件引用的静态文件路径出现错误。
+
+                                                                            <i style="font-size: .9em;color: #dd4848;margin-left: 5px;" title="三天内发布的文章" class="ui popover">new</i>
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>4
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-11-03 10:40:24" class="timeago">6小时前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84352" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/56022_1578200977.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84352" target="">
+                                <span class="topic-title">
+
+                                                                            go-carbon 2.2.12 版本发布， 轻量级、语义化、对开发者友好的 Golang 时间处理库
+
+                                                                            <i style="font-size: .9em;color: #dd4848;margin-left: 5px;" title="三天内发布的文章" class="ui popover">new</i>
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>3
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-11-03 08:45:24" class="timeago">8小时前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/go/t/83897" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/images/201801/03/1/MFCtSTiGzj.jpg"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    工作
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/go/t/83897" target="">
+                                <span class="topic-title">
+
+                                                                            80后找一份工作（PHP/Go）
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>26
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-11-02 14:21:17" class="timeago">1天前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/83886" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/77882_1657290251.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/83886" target="">
+                                <span class="topic-title">
+
+                                                                            GO 比较两个对象是否相同
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>3
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-11-02 13:43:44" class="timeago">1天前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84341" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/73997_1607305080.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84341" target="">
+                                <span class="topic-title">
+
+                                                                            2023-11-01：用go语言，沿街有一排连续的房屋。每间房屋内都藏有一定的现金
+
+                                                                            <i style="font-size: .9em;color: #dd4848;margin-left: 5px;" title="三天内发布的文章" class="ui popover">new</i>
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>0
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-11-02 11:50:46" class="timeago">1天前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/go/t/84337" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/117315_1698772945.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    问答
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/go/t/84337" target="">
+                                <span class="topic-title">
+
+                                                                            GOland导报标红
+
+                                                                            <i style="font-size: .9em;color: #dd4848;margin-left: 5px;" title="三天内发布的文章" class="ui popover">new</i>
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>0
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-11-01 16:11:33" class="timeago">2天前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/go/t/82876" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/97585_1683711426.webp!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    分享创造
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/go/t/82876" target="">
+                                <span class="topic-title">
+
+                                                                             DDD在Gin中的工程实践；（有人看嘛？）欢迎留言讨论
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>26
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-31 15:53:55" class="timeago">3天前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84310" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/107555_1698718042.jpg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84310" target="">
+                                <span class="topic-title">
+
+                                                                            go 工具链之 gofmt
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>0
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-31 14:02:43" class="timeago">3天前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84214" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/17682_1653892674.jpg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84214" target="">
+                                <span class="topic-title">
+
+                                                                            go-zero 中使用 gorm gen
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>5
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-31 11:43:17" class="timeago">3天前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/78529" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/77882_1657290251.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/78529" target="">
+                                <span class="topic-title">
+
+                                                                            k8s Label 2
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>1
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-31 08:46:43" class="timeago">3天前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84059" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/77882_1657290251.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84059" target="">
+                                <span class="topic-title">
+
+                                                                            GO 语言的并发模式你了解多少？
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>10
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-30 11:58:13" class="timeago">4天前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84279" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/73997_1607305080.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84279" target="">
+                                <span class="topic-title">
+
+                                                                            2023-10-28：用go语言，给定一个n*m的二维矩阵，每个位置都是字符， U
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>0
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-28 19:46:51" class="timeago">5天前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84276" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/3992_1459253454.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84276" target="">
+                                <span class="topic-title">
+
+                                                                            分享一个简单高效的内存缓存库
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>0
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-28 12:56:35" class="timeago">6天前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84039" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/98425_1653294087.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84039" target="">
+                                <span class="topic-title">
+
+                                                                            分享一个简单-便捷翻译的开源小工具（Go+Wails+Vue 组件开发）
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>8
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-26 15:37:46" class="timeago">1周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84230" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/73997_1607305080.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84230" target="">
+                                <span class="topic-title">
+
+                                                                            2023-10-25：用go语言，假如某公司目前推出了N个在售的金融产品
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>0
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-25 15:09:25" class="timeago">1周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/go/t/84217" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/8712_1482757444.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    问答
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/go/t/84217" target="">
+                                <span class="topic-title">
+
+                                                                            <i class="icon checkmark ui popover" style="color:#21ba45" data-position="top center" title="已解决" ></i>
+                                        有个难题请教一下大家，slice 切片扩容导致的问题
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>4
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-25 10:26:16" class="timeago">1周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/83285" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/88983_1667782409.png!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/83285" target="">
+                                <span class="topic-title">
+
+                                                                            学习gorm系列一：创建数据库连接
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>2
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-24 16:45:57" class="timeago">1周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/83800" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/77882_1657290251.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/83800" target="">
+                                <span class="topic-title">
+
+                                                                            什么是单点登录？什么又是 OAuth2.0？
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>14
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-24 16:28:42" class="timeago">1周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84170" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/19247_1506588635.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84170" target="">
+                                <span class="topic-title">
+
+                                                                            go-fractal  像Laravel 里 Resource 一样，自由灵活的返回想要的响应数据
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>2
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-24 09:24:37" class="timeago">1周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84184" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/73997_1607305080.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84184" target="">
+                                <span class="topic-title">
+
+                                                                            2023-10-21：用go语言，一共有三个服务A、B、C，网络延时分别为a、b、c 并且一定有
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>0
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-21 21:04:10" class="timeago">1周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84176" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/77882_1657290251.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84176" target="">
+                                <span class="topic-title">
+
+                                                                            GO 语言如何用好变长参数？
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>0
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-20 23:25:28" class="timeago">1周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84145" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/51273_1571682026.png!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84145" target="">
+                                <span class="topic-title">
+
+                                                                            go gui最佳解决方案 vue可视化窗口设计师源码
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>6
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-20 17:33:14" class="timeago">1周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84164" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/77882_1657290251.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84164" target="">
+                                <span class="topic-title">
+
+                                                                            GO 语言的方法？？
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>1
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-20 00:40:54" class="timeago">2周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84148" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/50757_1689652932.jpg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84148" target="">
+                                <span class="topic-title">
+
+                                                                            并发安全的单例模式（PHP&amp;Go）
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>1
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-19 13:58:04" class="timeago">2周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84140" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/77882_1657290251.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84140" target="">
+                                <span class="topic-title">
+
+                                                                            GO 语言的函数？？
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>0
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-18 23:12:55" class="timeago">2周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84136" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/73997_1607305080.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84136" target="">
+                                <span class="topic-title">
+
+                                                                            2023-10-18：用go语言，给定一个数组arr，长度为n，表示有0~n-1号设备
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>0
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-18 17:02:20" class="timeago">2周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84118" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/77882_1657290251.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84118" target="">
+                                <span class="topic-title">
+
+                                                                            这些 channel 用法你都用起来了吗？
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>0
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-17 22:18:00" class="timeago">2周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84063" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/73997_1607305080.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84063" target="">
+                                <span class="topic-title">
+
+                                                                            2023-10-14：用go语言，给定 pushed 和 popped 两个序列
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>2
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-17 21:16:16" class="timeago">2周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/go/t/84077" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/116069_1694787464.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    问答
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/go/t/84077" target="">
+                                <span class="topic-title">
+
+                                                                            <i class="icon checkmark ui popover" style="color:#21ba45" data-position="top center" title="已解决" ></i>
+                                        想搞个关于go的毕设不知道有什么题材可以写
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>12
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-17 19:49:39" class="timeago">2周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84054" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/77882_1657290251.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84054" target="">
+                                <span class="topic-title">
+
+                                                                            分权分域有啥内容？
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>1
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-17 11:26:24" class="timeago">2周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84102" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/116853_1697507711.jpeg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84102" target="">
+                                <span class="topic-title">
+
+                                                                            分享一本自己一直在更新的Gitbook，[为你自己学Go]
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>0
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-17 10:24:05" class="timeago">2周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84095" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/69310_1615214587.jpg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84095" target="">
+                                <span class="topic-title">
+
+                                                                            pprof性能分析
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>0
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-16 21:06:23" class="timeago">2周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84094" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/69310_1615214587.jpg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84094" target="">
+                                <span class="topic-title">
+
+                                                                            列式数据库ClickHouse学习总结
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>1
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-16 21:00:23" class="timeago">2周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/84093" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/69310_1615214587.jpg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/84093" target="">
+                                <span class="topic-title">
+
+                                                                            快速学习Ansible工具
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>2
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-16 20:34:58" class="timeago">2周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+
+
+                            <div class="py-2 simple-topic" style="border: none;border-bottom: 1px solid #f2f2f2;">
+                                <div class="image-44 user-avatar">
+                                    <a href="https://learnku.com/articles/83935" class="rm-tdu" target="">
+                                        <img style="width:40px;height:40px;border-radius: inherit;border: none;" class="image-border circle-image topic-list-author-avatar" src="https://cdn.learnku.com/uploads/avatars/69310_1615214587.jpg!/both/100x100"/>
+                                    </a>
+                                </div>
+
+                                <div class="category-name hide-on-mobile ">
+                                <span class="hide-on-mobile ui label status small ">
+                                    博客
+                                </span>
+                                </div>
+
+                                <a class="topic-title-wrap rm-tdu" href="https://learnku.com/articles/83935" target="">
+                                <span class="topic-title">
+
+                                                                            关于24届秋招求职求助
+
+                                                                    </span>
+
+                                    <span class=" hide-on-mobile simple-topic-meta">
+                                     <span class="count_set" style="font-size:13px">
+                                         <span class="count_of_replies ui popover" title="点赞  + 评论  + 收藏 ">
+                                            <i class="icon empty star" style="color:#"></i>16
+                                        </span>
+                                         <span class="count_seperator">|</span>
+                                                                                      <abbr title="2023-10-16 19:33:12" class="timeago">2周前</abbr>
+                                                                              </span>
+                                 </span>
+                                </a>
+                            </div>
+
+
+
+
+                        </div>
+
+                        <nav>
+                            <ul class="pagination">
+
+                                <li class="page-item disabled" aria-disabled="true" aria-label="&laquo; 上一页">
+                                    <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                                </li>
+
+
+
+
+
+                                <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
+                                <li class="page-item"><a class="page-link" href="https://learnku.com/go?page=2">2</a></li>
+                                <li class="page-item"><a class="page-link" href="https://learnku.com/go?page=3">3</a></li>
+                                <li class="page-item"><a class="page-link" href="https://learnku.com/go?page=4">4</a></li>
+                                <li class="page-item"><a class="page-link" href="https://learnku.com/go?page=5">5</a></li>
+                                <li class="page-item"><a class="page-link" href="https://learnku.com/go?page=6">6</a></li>
+                                <li class="page-item"><a class="page-link" href="https://learnku.com/go?page=7">7</a></li>
+                                <li class="page-item"><a class="page-link" href="https://learnku.com/go?page=8">8</a></li>
+
+
+                                <li class="page-item">
+                                    <a class="page-link" href="https://learnku.com/go?page=2" rel="next" aria-label="下一页 &raquo;">&rsaquo;</a>
+                                </li>
+                            </ul>
+                        </nav>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="four wide column stackable ">
+
+                <div class="item header sidebar">
+
+
+
+
+
+                    <div class="ui card top-color responsive community-details">
+                        <div class="content">
+                            <div class="header">
+                                <img class="ui image" style="width:22px;height:22px;margin-top:-2px;" src="https://cdn.learnku.com//uploads/communities/sNljssWWQoW6J88O9G37.png!/both/44x44"> <span class="ml-2">Go 技术论坛</span>
+
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="content main pb-2 pt-3">
+                            <div class="ui middle aligned list pb-1" style="line-height: 22px;">
+                                <div>
+                                    Go（又称 Golang）是 Google 开发的一种静态强类型、编译型、并发型，并具有垃圾回收功能的编程语言。Go 被誉为是未来的服务器端编程语言。
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="extra content">
+                            <div class="ui centered grid" style="margin-top: 0px;">
+                                <div class="eight wide column pr-1 pt-0">
+                                    <button class="ui primary fluid button  small login_required basic">
+                                        <i class="icon plus"></i> <span class="state">加入社区</span>
+                                    </button>
+                                </div>
+
+                                <div class="eight wide column pl-1 pt-0">
+                                    <button class="ui primary button fluid small login_required basic">
+                                        <i class="icon paint brush"></i> 发 帖
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="ui card responsive">
+                        <button class="ui primary button fluid subscribe-weekly-email community login_required popover" title="周一会发送上一周精华内容的邮件" style="" data-act="subscribe" data-id="6">
+                            <i class="icon envelope"></i>
+                            <span class="state"> 订阅 Go 周刊</span>
+                        </button>
+                    </div>
+
+                    <div class="ui card responsive top-color community-rules">
+                        <div class="content">
+                            <div class="header">
+                                <i class="icon checkmark box"></i> Go 社区规范
+                            </div>
+                        </div>
+
+                        <div class="content main py-0 pb-2">
+                            <div class="ui styled fluid accordion border-0 shadow-none">
+
+
+                                <div class=" title px-0">
+                                    1. 请保持友善
+                                    <i class="sort descending icon pull-right"></i>
+                                </div>
+                                <div class=" content px-0">
+                                    <p>不能有任何形式的人身攻击，这是讨论的基本底线。与人为善，比聪明更重要。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui card responsive community-details">
+
+                        <div class="content">
+                            <div class="header">
+                                <i class="icon users"></i> 论坛版主
+                            </div>
+                        </div>
+                        <div class="content readmore">
+
+                            <div class="ui middle aligned  list rm-link-color">
+                                <div class="item lh-3" >
+                                    <div class="right floated content">
+                                        <a class="ui label basic fw-normal small left pointing ui popover" title="版主第 24 周" target="_blank" href="https://learnku.com/docs/guide/administrator/4485">版主（24）</a>
+                                    </div>
+                                    <a href="https://learnku.com/users/46135">
+                                        <img class="ui avatar image" src="https://cdn.learnku.com/uploads/avatars/46135_1571727523.jpg!/both/100x100">
+                                    </a>
+                                    <a class="content color-black" href="https://learnku.com/users/46135" >
+                                        wangchunbo
+                                    </a>
+                                </div>
+                                <div class="item lh-3" >
+                                    <div class="right floated content">
+                                        <a class="ui label basic fw-normal small left pointing ui popover" title="版主第 12 周" target="_blank" href="https://learnku.com/docs/guide/administrator/4485">版主（12）</a>
+                                    </div>
+                                    <a href="https://learnku.com/users/36517">
+                                        <img class="ui avatar image" src="https://cdn.learnku.com/uploads/avatars/36517_1558363839.jpeg!/both/100x100">
+                                    </a>
+                                    <a class="content color-black" href="https://learnku.com/users/36517" >
+                                        摸鱻
+                                    </a>
+                                </div>
+                                <div class="item lh-3" >
+                                    <div class="right floated content">
+                                        <a class="ui label basic fw-normal small left pointing ui popover" title="版主第 8 周" target="_blank" href="https://learnku.com/docs/guide/administrator/4485">版主（8）</a>
+                                    </div>
+                                    <a href="https://learnku.com/users/58040">
+                                        <img class="ui avatar image" src="https://cdn.learnku.com/uploads/avatars/58040_1582707431.jpeg!/both/100x100">
+                                    </a>
+                                    <a class="content color-black" href="https://learnku.com/users/58040" >
+                                        taadis
+                                    </a>
+                                </div>
+                                <div class="item lh-3" >
+                                    <div class="right floated content">
+                                        <a class="ui label basic fw-normal small left pointing ui popover" title="版主第 4 周" target="_blank" href="https://learnku.com/docs/guide/administrator/4485">版主（4）</a>
+                                    </div>
+                                    <a href="https://learnku.com/users/27890">
+                                        <img class="ui avatar image" src="https://cdn.learnku.com/uploads/avatars/27890_1640589114.png!/both/100x100">
+                                    </a>
+                                    <a class="content color-black" href="https://learnku.com/users/27890" >
+                                        zhaocrazy
+                                    </a>
+                                </div>
+                                <div class="item lh-3" >
+                                    <div class="right floated content">
+                                        <a class="ui label basic fw-normal small left pointing ui popover" title="高级版主第 1 周" target="_blank" href="https://learnku.com/docs/guide/administrator/4485">高级版主（1）</a>
+                                    </div>
+                                    <a href="https://learnku.com/users/74">
+                                        <img class="ui avatar image" src="https://cdn.learnku.com/uploads/avatars/74_1427370662.jpeg!/both/100x100">
+                                    </a>
+                                    <a class="content color-black" href="https://learnku.com/users/74" >
+                                        xuri
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="https://learnku.com/docs/guide/administrator/4485" class="ui  right corner label tiny popover" title="如何成为论坛版主？"><i class="icon info"></i></a>
+
+                        <div class="content main text-center mb-0 pb-3 border-top-0  pt-2">
+                            <button class="ui button fluid apply login_required basic" data-url="https://learnku.com/go/moderators/apply" data-method="POST" data-prompt='请先阅读 <a href="https://learnku.com/docs/guide/administrator/4485" target="_blank" class="mt-2 mb-1 display-inline-block">如何成为论坛版主？</a>' >
+                                申请成为版主
+                            </button>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="ui card  responsive community-docs">
+                        <div class="content"><div class="header"><i class="icon book"></i> 社区文档</div></div>
+                        <div class="content">
+                            <div class="ui middle aligned list " data-height="200">
+                                <a class="item " href="https://learnku.com/docs/effective-go/2020">
+                                    <img class="ui avatar image tagged" src="https://cdn.learnku.com/uploads/images/201912/06/1/g4O1CkGc2B.png!/both/200x200 ">
+                                    <div class="content color-black">《高效的 Go 编程 Effective Go》</div>
+                                </a>
+                                <a class="item pt-2" href="https://learnku.com/docs/go-blog">
+                                    <img class="ui avatar image tagged" src="https://cdn.learnku.com/uploads/images/201912/28/1/3CTV7kaXtg.png!/both/200x200 ">
+                                    <div class="content color-black">《Go Blog 中文翻译》</div>
+                                </a>
+                                <a class="item pt-2" href="https://learnku.com/docs/the-little-go-book">
+                                    <img class="ui avatar image tagged" src="https://cdn.learnku.com/uploads/images/201807/09/1/7ZpHvbghuV.jpg!/both/200x200 ">
+                                    <div class="content color-black">《Go 简易教程》</div>
+                                </a>
+                                <a class="item pt-2" href="https://learnku.com/docs/gobyexample/2020">
+                                    <img class="ui avatar image tagged" src="https://cdn.learnku.com/uploads/images/201912/07/1/2zrnUUEy5O.png!/both/200x200 ">
+                                    <div class="content color-black">《Go 编程实例 Go by Example》</div>
+                                </a>
+                                <a class="item pt-2" href="https://learnku.com/docs/the-way-to-go">
+                                    <img class="ui avatar image tagged" src="https://cdn.learnku.com/uploads/images/201805/11/1/ZnrA2VK0SN.png!/both/200x200 ">
+                                    <div class="content color-black">《Go 入门指南》</div>
+                                </a>
+                                <a class="item pt-2" href="https://learnku.com/docs/go-fundamental-programming">
+                                    <img class="ui avatar image tagged" src="https://cdn.learnku.com/uploads/images/201805/12/1/cqO2hVEMtp.png!/both/200x200 ">
+                                    <div class="content color-black">《Go 编程基础（视频）》</div>
+                                </a>
+                                <a class="item pt-2" href="https://learnku.com/docs/build-web-application-with-golang">
+                                    <img class="ui avatar image tagged" src="https://cdn.learnku.com/uploads/images/201805/16/1/mIe9zcWQM4.png!/both/200x200 ">
+                                    <div class="content color-black">《Go Web 编程》</div>
+                                </a>
+                                <a class="item pt-2" href="https://learnku.com/docs/iris-go/10">
+                                    <img class="ui avatar image tagged" src="https://cdn.learnku.com/uploads/images/201807/13/1/JV7EhZLizp.png!/both/200x200 ">
+                                    <div class="content color-black">《Iris 框架中文文档》</div>
+                                </a>
+                                <a class="item pt-2" href="https://learnku.com/docs/learn-go-with-tests">
+                                    <img class="ui avatar image tagged" src="https://cdn.learnku.com/uploads/images/201911/21/36517/aviegH16FE.png!/both/200x200 ">
+                                    <div class="content color-black">《通过测试学习 Go 编程》</div>
+                                </a>
+                                <a class="item pt-2" href="https://learnku.com/docs/gin-gonic/1.7">
+                                    <img class="ui avatar image tagged" src="https://cdn.learnku.com/uploads/images/201807/14/1/K1ijsbTBcU.png!/both/200x200 ">
+                                    <div class="content color-black">《Gin 框架中文文档》</div>
+                                </a>
+                                <a class="item pt-2" href="https://learnku.com/docs/gorm/v2">
+                                    <img class="ui avatar image tagged" src="https://cdn.learnku.com/uploads/images/201807/30/1/a3e946EpRi.png!/both/200x200 ">
+                                    <div class="content color-black">《GORM 中文文档》</div>
+                                </a>
+                                <a class="item pt-2" href="https://learnku.com/docs/go-database-sql">
+                                    <img class="ui avatar image tagged" src="https://cdn.learnku.com/uploads/images/202009/17/1/qt7yXJ2jD0.png!/both/200x200 ">
+                                    <div class="content color-black">《Go SQL 数据库教程》</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+                    <div class="ui card text-center responsive">
+                        <div class="content">
+                            <div class="header">
+                                社区赞助商
+                            </div>
+                        </div>
+
+
+                        <div class="content main rm-top-bottom-padding" style="padding: 4px 15px 6px!important;">
+                            <a rel="nofollow" class="color-normal mt-3 display-block" href="https://www.upyun.com/" target=&quot;_blank&quot; title="又拍云-加速在线业务" style="    line-height: 28px;">
+                                <img src="https://cdn.learnku.com/uploads/banners/6xjr0tkvWMJnYzEkBEd2.png!large" title="又拍云-加速在线业务" class="ui popover" style="width:150px;   margin: 3px 0;">
+                            </a>
+                            <a rel="nofollow" class="color-normal mt-3 display-block" href="https://zhaopin.comiru.cn/home?from=lc" target=&quot;_blank&quot; title="日本招聘" style="    line-height: 28px;">
+                                <img src="https://cdn.learnku.com/uploads/banners/1Ihupum3jYbbaKS9vqUL.jpg!large" title="日本招聘" class="ui popover" style="width:150px;   margin: 3px 0;">
+                            </a>
+                            <a rel="nofollow" class="color-normal mt-3 display-block" href="https://www.huasaicloud.com?site=learnku" target=&quot;_blank&quot; title="华赛云 特惠来袭 云服务器 永久返佣" style="    line-height: 28px;">
+                                <img src="https://cdn.learnku.com/uploads/banners/lp38DH8IjSgDLPOCjaYZ.png!large" title="华赛云 特惠来袭 云服务器 永久返佣" class="ui popover" style="width:150px;   margin: 3px 0;">
+                            </a>
+                            <a rel="nofollow" class="color-normal mt-3 display-block" href="https://mixpay.me/?utm_source=learnku" target=&quot;_blank&quot; title="Decentralized Web3 Cross-Chain ‍Payment Protocol" style="    line-height: 28px;">
+                                <img src="https://cdn.learnku.com/uploads/banners/sIrR8HH5jtwSb1UEI2zz.png!large" title="Decentralized Web3 Cross-Chain ‍Payment Protocol" class="ui popover" style="width:150px;   margin: 3px 0;">
+                            </a>
+                            <a rel="nofollow" class="color-normal mt-3 display-block" href="http://github.crmeb.net/u/learnku" target=&quot;_blank&quot; title="CRMEB高品质开源商城系统，40w+开发者的选择，值得托付！" style="    line-height: 28px;">
+                                <img src="https://cdn.learnku.com/uploads/banners/GX8a3CAZX276iGVAz6jN.jpg!large" title="CRMEB高品质开源商城系统，40w+开发者的选择，值得托付！" class="ui popover" style="width:150px;   margin: 3px 0;">
+                            </a>
+
+                            <a target="_blank" class="rm-link-color tdu display-block mt-2 mb-2 text-mute" href="https://learnku.com/contact?code=sponsor">成为赞助商</a>
+                        </div>
+                    </div>
+
+                    <div class="ui card responsive">
+                        <div class="content">
+                            <div class="header text-center">
+                                友情链接
+                            </div>
+                        </div>
+
+                        <div class="content text-center" style="padding-top:5px">
+                            <a class="" href="https://ruby-china.org" rel="nofollow noopener noreferrer" target="_blank" style="margin-top: 10px;display: block;">
+                                <img src="https://cdn.learnku.com/assets/images/friends/ruby-china.png" class="ui popover" data-variation="inverted"  data-content="Ruby China" width="100%" style="width:150px; margin: 3px 0;">
+                            </a>
+                            <a class="" href="https://testerhome.com" rel="nofollow noopener noreferrer" target="_blank" style="margin-top: 10px;display: block;">
+                                <img src="https://cdn.learnku.com/uploads/banners/lHLqvDd0TQZD7CKdmguG.png" class="ui popover" data-variation="inverted"  data-content="Tester Home" width="100%" style="width:150px; margin: 3px 0;">
+                            </a>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    <div class="ui inverted vertical footer segment">
+        <div class="ui center aligned container">
+
+
+            <div class="ui extra-padding center" name="recommended" id="recommended" style="padding:15px">
+
+                <div class="rm-link-color d-flex mb-1 mt-3" style="justify-content: center;">
+                    <h3 class="rm-tdu">
+                        <a href="https://learnku.com/contact?code=sponsor"><i class="icon heart red"></i> 社区赞助商</a>
+                    </h3>
+                </div>
+
+
+                <div class="ui grid p-1 mt-1" style="justify-content: center;">
+                    <div class="six column row ui stackable">
+                        <div class="column ">
+                            <a rel="nofollow noopener noreferrer" class="color-normal mt-3 display-block" href="http://github.crmeb.net/u/learnku"
+                               target=&quot;_blank&quot; title="CRMEB高品质开源商城系统，40w+开发者的选择，值得托付！"
+                               style="    line-height: 28px;">
+                                <img src="https://cdn.learnku.com/uploads/banners/GX8a3CAZX276iGVAz6jN.jpg!large" title="CRMEB高品质开源商城系统，40w+开发者的选择，值得托付！" class="ui popover"
+                                     style="width:150px;   margin: 3px 0;">
+                            </a>
+                        </div>
+                        <div class="column ">
+                            <a rel="nofollow noopener noreferrer" class="color-normal mt-3 display-block" href="https://www.upyun.com/"
+                               target=&quot;_blank&quot; title="又拍云-加速在线业务"
+                               style="    line-height: 28px;">
+                                <img src="https://cdn.learnku.com/uploads/banners/6xjr0tkvWMJnYzEkBEd2.png!large" title="又拍云-加速在线业务" class="ui popover"
+                                     style="width:150px;   margin: 3px 0;">
+                            </a>
+                        </div>
+                        <div class="column ">
+                            <a rel="nofollow noopener noreferrer" class="color-normal mt-3 display-block" href="https://zhaopin.comiru.cn/home?from=lc"
+                               target=&quot;_blank&quot; title="日本招聘"
+                               style="    line-height: 28px;">
+                                <img src="https://cdn.learnku.com/uploads/banners/1Ihupum3jYbbaKS9vqUL.jpg!large" title="日本招聘" class="ui popover"
+                                     style="width:150px;   margin: 3px 0;">
+                            </a>
+                        </div>
+                        <div class="column ">
+                            <a rel="nofollow noopener noreferrer" class="color-normal mt-3 display-block" href="https://mixpay.me/?utm_source=learnku"
+                               target=&quot;_blank&quot; title="Decentralized Web3 Cross-Chain ‍Payment Protocol"
+                               style="    line-height: 28px;">
+                                <img src="https://cdn.learnku.com/uploads/banners/sIrR8HH5jtwSb1UEI2zz.png!large" title="Decentralized Web3 Cross-Chain ‍Payment Protocol" class="ui popover"
+                                     style="width:150px;   margin: 3px 0;">
+                            </a>
+                        </div>
+                        <div class="column ">
+                            <a rel="nofollow noopener noreferrer" class="color-normal mt-3 display-block" href="https://www.huasaicloud.com?site=learnku"
+                               target=&quot;_blank&quot; title="华赛云 特惠来袭 云服务器 永久返佣"
+                               style="    line-height: 28px;">
+                                <img src="https://cdn.learnku.com/uploads/banners/lp38DH8IjSgDLPOCjaYZ.png!large" title="华赛云 特惠来袭 云服务器 永久返佣" class="ui popover"
+                                     style="width:150px;   margin: 3px 0;">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="pt-2 text-mute" style="justify-content: center;">
+                    <a class="flex-right tdu rm-link-color" target="_blank" href="https://learnku.com/contact?code=sponsor">
+                        成为赞助商
+                    </a>
+                </div>
+
+
+            </div>
+
+
+            <div class="ui inverted section divider"></div>
+
+            <div class="ui stackable inverted divided grid">
+                <div class="four wide column">
+                    <h4 class="ui inverted header">
+                        <img src="https://cdn.learnku.com/uploads/images/201908/22/1/oVrAoOQ4Vc.png!/fw/40" alt=""
+                             style="width: 32px;border-radius: 6px;position: relative;top: -5px;">
+                        关于 LearnKu
+                    </h4>
+                    <div class="ui inverted  text-center">
+                        <div class="lh-3">LearnKu 是终身编程者的修道场</div>
+                        <div class="lh-3">做最专业、严肃的技术论坛</div>
+                    </div>
+
+                    <div class="ui inverted  text-center mt-3 rm-link-color tdu">
+                        <i class="icon birthday"></i> <a href="https://learnku.com/articles/28735">LearnKu 诞生的故事</a>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <h4 class="ui inverted header">资源推荐</h4>
+                    <div class="ui inverted link list">
+                        <li class="mb-1">
+                            <a class="item" href="https://learnku.com/docs/guide">
+                                《社区使用指南》
+                            </a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="item" href="https://learnku.com/docs/writing-docs">
+                                《文档撰写指南》
+                            </a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="item" href="https://learnku.com/docs/guide/protocol/4992">
+                                《LearnKu 社区规范》
+                            </a>
+                        </li>
+                        <li class="mb-1">
+                            <a class="item" href="https://learnku.com/docs/guide/smart-questions/2032">
+                                《提问的智慧》
+                            </a>
+                        </li>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <h4 class="ui inverted header">服务提供商</h4>
+                    <div class="ui inverted link list">
+                        <a href="https://passport.ucloud.cn/?invitation_code=rami45zj5kpm&amp;ytag=reZ5E7" rel="nofollow noopener noreferrer" class="item"
+                           target="_blank" style="line-height: 28px;">
+                            <img src="https://cdn.learnku.com/uploads/banners/bQawWl3vT5dc2lYx5JZ7.png!large" title="本站服务器由 UCloud 赞助"
+                                 class="ui popover"
+                                 style="height: 20px;margin-bottom: -4px;margin-right: 3px;display: inline-block;">
+                        </a>
+                        <a href="https://www.upyun.com/" rel="nofollow noopener noreferrer" class="item"
+                           target="_blank" style="line-height: 28px;">
+                            <img src="https://cdn.learnku.com/uploads/banners/XPtLlZmIN1cQbLuDFEON.png!large" title="社区 CDN 赞助商"
+                                 class="ui popover"
+                                 style="height: 20px;margin-bottom: -4px;margin-right: 3px;display: inline-block;">
+                        </a>
+                        <a href="http://www.sendcloud.net/" rel="nofollow noopener noreferrer" class="item"
+                           target="_blank" style="line-height: 28px;">
+                            <img src="https://cdn.learnku.com/uploads/banners/JpTCK6OKYBIrBIWdtob8.png!large" title="订阅邮件赞助商：SendCloud"
+                                 class="ui popover"
+                                 style="height: 20px;margin-bottom: -4px;margin-right: 3px;display: inline-block;">
+                        </a>
+                    </div>
+                </div>
+                <div class="four wide column">
+                    <h4 class="ui inverted header">其他信息</h4>
+                    <div class="ui inverted link list">
+
+                        <li>
+                            <a class="item" href="https://learnku.com/docs/guide/administrator/4485">
+                                <i class="icon heartbeat"></i> 成为版主
+                            </a>
+                        </li>
+                        <li>
+                            <a class="item" href="https://learnku.com/quizzes">
+                                <i class="icon wpforms"></i> 所有测验
+                            </a>
+                        </li>
+                        <li>
+                            <a class="item" href="https://learnku.com/contact">
+                                <i class="icon wechat" aria-hidden="true"></i> 联系站长（反馈建议）
+                            </a>
+                        </li>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui inverted section divider"></div>
+            <div style="color: rgb(137, 137, 140);font-size:0.9em;" class="rm-link-color">
+                <p>
+                    <a href="http://beian.miit.gov.cn/" target="_blank">粤ICP备18099781号-6</a>
+                    <span class="mx-2">|</span>
+                    <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030502004330" target="_blank"><img
+                            src="https://cdn.learnku.com/uploads/images/201908/21/1/L4ckM2CVb6.png!/fw/20" width="20"
+                            style="position: relative;top: 4px;"> 粤公网安备 44030502004330号</a>
+                    <span class="mx-2">|</span>
+                    <a href="https://learnku.com/lk">违法和不良信息举报</a>
+                </p>
+                <p style=" margin-top:-8px;margin-bottom: -0px;" class="ui inverted signature">
+                    由 <a href="https://learnku.com/contact" target="_blank" style="color: inherit;">Summer</a> 设计和编码 <span
+                        style="color: #e27575;font-size: 14px;">❤</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+<div class="ui modal login small" style="width:400px;margin: 0em 0em 0em -200px;">
+    <i class="close icon"></i>
+    <div class="header">
+        <h4 class="modal-title ">
+            <img class="ui image display-inline-block mr-2" style="width:32px;height:32px;"
+                 src="https://cdn.learnku.com/uploads/images/201901/24/1/OyBnfB2vlk.png"> <span
+                style="position: relative;top: 4px;">请登录</span>
+        </h4>
+    </div>
+    <div class="content">
+
+
+
+        <form class="ui form login" role="form" method="POST" action="https://learnku.com/auth/login"
+              accept-charset="UTF-8">
+            <input type="hidden" name="_token" value="mi3xbBvZam9wyp7zZ2ASP6u5f4pumUWyToZBXnWX">
+            <input type="hidden" name="remember" value="yes">
+
+            <input type="hidden" name="return_back" value="no">
+
+            <div class="field">
+                <div class="ui left icon input">
+                    <i class="user icon"></i>
+                    <input type="text" name="username" placeholder="邮 箱 or 手 机 or 用户名" value=""
+                           required>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui left icon input">
+                    <i class="lock icon"></i>
+                    <input type="password" name="password" placeholder="密 码" value="" required>
+                </div>
+            </div>
+            <button class="ui primary right labeled icon button" type="submit">
+                <i class="right arrow icon"></i>
+                提交
+            </button>
+
+            <div class="pull-right mt-2 rm-link-color">
+                <a class="btn btn-link " href="https://learnku.com/auth/forget" target="_blank">
+                    忘记密码?
+                </a>
+                <span class="text-mute">or</span>
+                <a class="btn btn-link " href="https://learnku.com/auth/register" target="_blank">
+                    注册
+                </a>
+            </div>
+
+            <div class="clearfix"></div>
+
+
+            <div class="ui horizontal divider fs-tiny text-mute">
+                第三方账号登录
+            </div>
+
+
+
+            <a class="ui button fluid mt-2 green wechat-login-link"
+               href="https://learnku.com/auth/oauth?driver=wechat"><i class="icon wechat "></i>
+                微信登录</a>
+
+            <a class="ui button fluid mt-2 basic" id="login-required-submit"
+               href="https://learnku.com/auth/oauth?driver=github"><i class="icon github alternate"></i>
+                GitHub 登录</a>
+
+        </form>
+    </div>
+</div>
+
+
+<div class="ui modal small report">
+    <div class="header modal-title">内容举报</div>
+    <form class="ui form error" method="POST" action="https://learnku.com/reports" accept-charset="UTF-8">
+        <input type="hidden" name="_token" value="mi3xbBvZam9wyp7zZ2ASP6u5f4pumUWyToZBXnWX">
+        <input name="reportable_id" type="hidden" value="">
+        <input name="reportable_type" type="hidden" value="">
+        <div class="content" style="padding: 20px;">
+            <div class="ui message warning show">
+                <i class="icon info"></i> 匿名举报，为防止滥用，仅管理员可见举报者。
+            </div>
+            <p>我要举报该<span class='modal-typename'></span>，理由是：</p>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="spam" required>
+                    <label><strong>垃圾广告</strong>：恶意灌水、广告、推广等内容</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="meaningless" required>
+                    <label><strong>无意义内容</strong>：测试、灌水、文不对题、消极内容、文章品质太差等</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="violation" required>
+                    <label><strong>违规内容</strong>：色情、暴利、血腥、敏感信息等</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="unfriendly" required>
+                    <label><strong>不友善内容</strong>：人身攻击、挑衅辱骂、恶意行为</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="vpn" required>
+                    <label><strong>科学上网</strong>：翻墙、VPN、Shadowsocks，政策风险，会被关站！</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="qa" required>
+                    <label><strong>不懂提问</strong>：提问太随意，需要再做一遍《提问的智慧》测验</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="casually_ask" required>
+                    <label><strong>随意提问</strong>：提问没有发布在社区问答分类下</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="markdown" required>
+                    <label><strong>排版混乱</strong>：没有合理使用 Markdown 编写文章，未使用代码高亮</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="copywriting" required>
+                    <label><strong>内容结构混乱</strong>：逻辑不清晰，内容混乱，难以阅读</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="title" required>
+                    <label><strong>标题随意</strong>：标题党、标题不释义</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="category" required>
+                    <label><strong>尊重版权</strong>：分享付费课程、破解软件（付费），侵犯作者劳动成果</label>
+                </div>
+            </div>
+            <div class="field">
+                <div class="ui radio checkbox">
+                    <input type="radio" name="report_type" value="other" required>
+                    <label><strong>其他理由</strong>：请补充说明</label>
+                </div>
+            </div>
+            <div class="field">
+                <textarea placeholder="请提供详尽的说明" name="reason" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="actions field" style="padding: 1px 12px 25px;">
+            <button class="ui primary button" type="submit">举报</button>
+            <div class="ui cancel button">取消</div>
+        </div>
+    </form>
+</div>
+
+
+
+</body>
+
+
+<!-- Scripts -->
+<script src="https://cdn.learnku.com//build/js/b29c9231a35e441bd0ff6796ddb25fa2-vendors.js"></script>
+<script src="https://cdn.learnku.com//build/js/8d7c3161f92dd72b53e3511a584cad20-app.js"></script>
+
+
+</html>
+{{end}}
